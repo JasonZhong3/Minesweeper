@@ -1,15 +1,13 @@
 import de.bezier.guido.*;
 //Declare and initialize constants NUM_ROWS and NUM_COLS = 20
-private final static int NUM_ROWS = 5;
-private final static int NUM_COLS = 5;
+private final static int NUM_ROWS = 20;
+private final static int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList <MSButton>(); //ArrayList of just the minesweeper buttons that are mined
-
 void setup ()
 {
   size(400, 400);
   textAlign(CENTER, CENTER);
-
   // make the manager
   Interactive.make( this );
   //your code to initialize buttons goes here
@@ -59,14 +57,20 @@ public void displayLosingMessage()
     for (int c = 0; c < NUM_COLS; c++)
       if (buttons[r][c].flagged == false)
         buttons[r][c].clicked = true;
-  buttons[NUM_ROWS/2][NUM_COLS/2].myLabel = "You Lose";
-  System.out.println("You Lose!");
+  String s = "You A Loser!";
+  for (int i = 0; i < s.length(); i++) {
+    buttons[NUM_ROWS/2][NUM_COLS/2 + i - 6].flagged = false;
+    buttons[NUM_ROWS/2][NUM_COLS/2 + i - 6].myLabel = s.substring(i, i+1);
+  }
 }
 public void displayWinningMessage()
 {
   //your code here
-  buttons[NUM_ROWS/2][NUM_COLS/2].myLabel = "You Win";
-  System.out.println("You Win!");
+  String s = "You A Winner!";
+  for (int i = 0; i < s.length(); i++) {
+    buttons[NUM_ROWS/2][NUM_COLS/2 + i - 6].flagged = false;
+    buttons[NUM_ROWS/2][NUM_COLS/2 + i - 6].myLabel = s.substring(i, i+1);
+  }
 }
 public boolean isValid(int r, int c)
 {
