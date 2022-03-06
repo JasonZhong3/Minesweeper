@@ -43,10 +43,13 @@ public void draw ()
 public boolean isWon()
 {
   //your code here
+  int bombs = 0;
   for (int r = 0; r < NUM_ROWS; r++) 
     for (int c = 0; c < NUM_COLS; c++)
       if (mines.contains(buttons[r][c]) && buttons[r][c].flagged == true)
-        return true;
+        bombs++;
+  if(bombs == NUM_ROWS)
+    return true;
   return false;
 }
 public void displayLosingMessage()
@@ -56,6 +59,7 @@ public void displayLosingMessage()
     for (int c = 0; c < NUM_COLS; c++)
       if (buttons[r][c].flagged == false)
         buttons[r][c].clicked = true;
+  text("You Lose", 200,200);
   System.out.println("You Lose!");
 }
 public void displayWinningMessage()
